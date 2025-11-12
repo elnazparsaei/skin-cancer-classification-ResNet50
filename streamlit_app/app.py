@@ -86,6 +86,14 @@ def load_model():
         st.stop()
 
 
+def custom_preprocess_input(image_array):
+    import numpy as np
+    image_array = image_array[:, :, ::-1]
+    mean = np.array([103.939, 116.779, 123.68], dtype=np.float32)
+    image_array = image_array - mean
+    return image_array
+
+
 # Class Info
 class_info = {
     "AK": {"name": "Actinic Keratosis (AK)", "risk": "Pre-cancerous", "desc": "Rough, scaly patches on sun-exposed skin. Can progress to SCC.", "source": "AAD"},
@@ -161,10 +169,9 @@ if 'image' in st.session_state:
     if st.button("Predict Now", type="primary", key="predict_btn"):
         img = st.session_state.image
         img_resized = img.resize((224, 224))
-        img_array = np.array(img_resized) / 255.0
-        img_array = preprocess_input(img_array) 
+        img_array = np.array(img_resized)
+        img_array = custom_preprocess_input(img_array)  
         img_array = np.expand_dims(img_array, axis=0)
-        
         with st.spinner("Analyzing..."):
             preds = model.predict(img_array)[0]
             pred_idx = np.argmax(preds)
