@@ -7,6 +7,7 @@ from io import BytesIO
 import tensorflow as tf
 from tensorflow.keras.applications.resnet50 import preprocess_input
 import os
+from tf_keras.models import load_model 
 
 # Page Config
 st.set_page_config(
@@ -71,7 +72,9 @@ def load_model():
                 st.stop()
 
     try:
-        model = tf.keras.models.load_model(
+       # when use tf: model = tf.keras.models.load_model --> for use on local
+       # when use tf-keras --> for using streamlit cloud because tf is heavy
+        model = load_model(
             model_path,
             custom_objects={'focal_loss': focal_loss},
             compile=False
