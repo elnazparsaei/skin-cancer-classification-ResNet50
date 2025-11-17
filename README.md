@@ -1,6 +1,11 @@
 # Skin Cancer Classification using ResNet50 (ISIC 2019)
-<img src="logo/skin.jpg">
----
+## Live Demo
+
+<p align="center">
+  <img src="https://github.com/elnazparsaei/skin-cancer-classification-ResNet50/streamlit_app/demo/demo.gif" width="900"/>
+</p>
+
+/home/elnaz/skin-cancer-classification-ResNet50/streamlit_app/demo/
 
 ## Why This Project Matters
 
@@ -79,7 +84,5 @@ Download [best_final_model.keras](https://drive.google.com/drive/folders/1gacp-j
 - Test-Time Augmentation (TTA)
 - Ensemble multiple models
 - Add lesion segmentation (ROI)
-- Deploy as Streamlit web app (coming soon!)
+- Deploy as Streamlit web app
 
-## Web App (In Development)
-A live demo using Streamlit will be added soon.

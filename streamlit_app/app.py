@@ -7,7 +7,7 @@ from io import BytesIO
 import tensorflow as tf
 from tensorflow.keras.applications.resnet50 import preprocess_input
 import os
-from tf_keras import models
+
 
 
 # Page Config
@@ -73,9 +73,7 @@ def load_model():
                 st.stop()
 
     try:
-       # when use tf: model = tf.keras.models.load_model --> for use on local
-       # when use tf-keras --> for using streamlit cloud because tf is heavy
-        model = models.load_model(
+        model = tf.keras.models.load_model(
             model_path,
             custom_objects={'focal_loss': focal_loss},
             compile=False
@@ -84,14 +82,6 @@ def load_model():
     except Exception as e:
         st.error(f"Model loading failed: {str(e)}")
         st.stop()
-
-
-def custom_preprocess_input(image_array):
-    import numpy as np
-    image_array = image_array[:, :, ::-1]
-    mean = np.array([103.939, 116.779, 123.68], dtype=np.float32)
-    image_array = image_array - mean
-    return image_array
 
 
 # Class Info
@@ -169,9 +159,10 @@ if 'image' in st.session_state:
     if st.button("Predict Now", type="primary", key="predict_btn"):
         img = st.session_state.image
         img_resized = img.resize((224, 224))
-        img_array = np.array(img_resized)
-        img_array = custom_preprocess_input(img_array)  
+        img_array = np.array(img_resized) / 255.0
+        img_array = preprocess_input(img_array) 
         img_array = np.expand_dims(img_array, axis=0)
+        
         with st.spinner("Analyzing..."):
             preds = model.predict(img_array)[0]
             pred_idx = np.argmax(preds)
