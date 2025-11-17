@@ -2,7 +2,7 @@
 ## Live Demo
 
 <p align="center">
-  <img src="https://github.com/elnazparsaei/skin-cancer-classification-ResNet50/streamlit_app/demo/demo.gif" width="900"/>
+  <img src="streamlit_app/demo/demo.gif" width="900"/>
 </p>
 
 /home/elnaz/skin-cancer-classification-ResNet50/streamlit_app/demo/
