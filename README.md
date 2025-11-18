@@ -5,7 +5,6 @@
   <img src="streamlit_app/demo/demo.gif" width="900"/>
 </p>
 
-/home/elnaz/skin-cancer-classification-ResNet50/streamlit_app/demo/
 
 ## Why This Project Matters
 
